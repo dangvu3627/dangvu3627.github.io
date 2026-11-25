@@ -1,0 +1,32 @@
+:root {
+  --bg: #0a0b0c;
+  --surface: #0e1012;
+  --surface-2: #14171a;
+  --surface-hover: #111417;
+  --line: #1c2024;
+  --line-card: #1f2428;
+  --line-strong: #3a4148;
+  --text: #eef0f1;
+  --text-2: #b9c0c6;
+  --text-3: #8d969e;
+  --accent: #ff3b3b;
+
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --content-max: 1120px;
+  --gutter: 24px;
+  --section-pad: 96px;
+
+  --radius-card: 6px;
+  --radius-btn: 8px;
+  --radius-chip: 4px;
+
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+@media (max-width: 600px) {
+  :root {
+    --section-pad: 64px;
+  }
+}
