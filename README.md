@@ -2,7 +2,7 @@
 
 **Live:** [dangvu3627.github.io](https://dangvu3627.github.io/)
 
-My personal portfolio. I'm a Computer Science (Co-op) student at the University of Waterloo with a Digital Hardware Specialization, writing embedded flight software at the Waterloo Aerial Robotics Group (WARG).
+My personal portfolio. I'm a Computer Science (Co-op) student at the University of Waterloo, writing embedded flight software at the Waterloo Aerial Robotics Group (WARG).
 
 The site brings together my experience, projects and technical skills in embedded systems and hardware, from STM32 firmware and CAN logging to a flight-tested Arduino quadcopter, so recruiters and collaborators can find what I work on and how to reach me.
 
