@@ -12,24 +12,27 @@ const hasImage = publicAssetExists(p.image);
 
 <TargetCard as="article" href={p.url} class="proj">
   <div class="proj__shot">
-    {
-      hasImage ? (
-        <img src={p.image} alt="" width="960" height="480" loading="lazy" decoding="async" />
-      ) : (
-        <span class="proj__ph mono" aria-hidden="true">{p.name}</span>
-      )
-    }
+    {hasImage ? (
+      <img src={p.image} alt="" width="960" height="480" loading="lazy" decoding="async" />
+    ) : (
+      <span class="proj__ph mono" aria-hidden="true">
+        {p.name}
+      </span>
+    )}
   </div>
   <div class="proj__body">
     <div class="proj__head">
       <h3 class="proj__name">
-        {p.name}{p.url && <span class="visually-hidden"> (opens repository)</span>}
+        {p.name}
+        {p.url && <span class="visually-hidden"> (opens repository)</span>}
       </h3>
       <span class="proj__date mono">{p.date}</span>
     </div>
     <p class="proj__desc">{p.desc}</p>
     <ul class="proj__tags mono" aria-label="Technologies">
-      {p.tags.map((t) => <li>{t}</li>)}
+      {p.tags.map((t) => (
+        <li>{t}</li>
+      ))}
     </ul>
   </div>
 </TargetCard>

@@ -6,13 +6,21 @@ const s = sections.find((x) => x.id === 'contact')!;
 <footer id={s.id} data-sec={s.sec} class="foot">
   <div class="foot__inner container reveal">
     <div class="foot__main">
-      <span class="foot__label mono">{s.index} / {s.label.toUpperCase()}</span>
+      <span class="foot__label mono">
+        {s.index} / {s.label.toUpperCase()}
+      </span>
       <h2 class="foot__h2">{s.heading}</h2>
-      <a class="foot__email" href={`mailto:${profile.email}`}>{profile.email}</a>
+      <a class="foot__email" href={`mailto:${profile.email}`}>
+        {profile.email}
+      </a>
     </div>
     <div class="foot__links mono">
-      <a href={profile.github} target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
-      <a href={profile.linkedin} target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+      <a href={profile.github} target="_blank" rel="noopener">
+        GitHub <span aria-hidden="true">↗</span>
+      </a>
+      <a href={profile.linkedin} target="_blank" rel="noopener">
+        LinkedIn <span aria-hidden="true">↗</span>
+      </a>
       <span>{meta.copyright}</span>
     </div>
   </div>

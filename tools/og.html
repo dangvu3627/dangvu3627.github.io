@@ -1,46 +1,186 @@
 <!doctype html>
 <!-- Source for public/og.png (1200x630). Render once with any headless browser at 1200x630. -->
 <html>
-<head>
-<meta charset="utf-8" />
-<style>
-  @font-face { font-family: Inter; font-weight: 700; src: url(../node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2); }
-  @font-face { font-family: Inter; font-weight: 400; src: url(../node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2); }
-  @font-face { font-family: 'JetBrains Mono'; src: url(../node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2); }
-  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
-  body { background: #0a0b0c repeating-linear-gradient(0deg, rgba(255,255,255,.028) 0 1px, transparent 1px 3px); color: #eef0f1; font-family: Inter, sans-serif; position: relative; }
-  .f { position: absolute; inset: 36px 48px; }
-  .c { position: absolute; width: 72px; height: 46px; border: 0 solid #eef0f1; }
-  .tl { left: 0; top: 0; border-width: 2px 0 0 2px; border-top-left-radius: 10px; }
-  .tr { right: 0; top: 0; border-width: 2px 2px 0 0; border-top-right-radius: 10px; }
-  .bl { left: 0; bottom: 0; border-width: 0 0 2px 2px; border-bottom-left-radius: 10px; }
-  .br { right: 0; bottom: 0; border-width: 0 2px 2px 0; border-bottom-right-radius: 10px; }
-  .row { position: absolute; left: 36px; right: 36px; display: flex; justify-content: space-between; font: 16px 'JetBrains Mono', monospace; color: #b9c0c6; }
-  .top { top: 16px; } .bot { bottom: 16px; justify-content: space-around; }
-  .rec::before { content: ''; display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #ff3b3b; margin-right: 8px; }
-  .hz { position: absolute; left: 14%; right: 14%; top: 380px; display: flex; align-items: center; gap: 26px; }
-  .hz i { flex: 1; height: 2px; background: #eef0f1; opacity: .85; }
-  .x { position: relative; width: 44px; height: 44px; }
-  .x b { position: absolute; background: #eef0f1; }
-  .v { left: 21px; top: -22px; width: 2px; height: 88px; } .h { left: -22px; top: 21px; width: 88px; height: 2px; }
-  .x s { position: absolute; left: 17px; top: 17px; width: 10px; height: 10px; background: #ff3b3b; }
-  .t { position: absolute; left: 0; right: 0; top: 150px; text-align: center; }
-  .lbl { font: 16px 'JetBrains Mono', monospace; color: #8d969e; }
-  h1 { margin: 14px 0 16px; font-size: 104px; line-height: 1; letter-spacing: -3px; font-weight: 700; }
-  p { margin: 0; font-size: 24px; color: #b9c0c6; }
-</style>
-</head>
-<body>
-  <div class="f">
-    <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span><span class="c br"></span>
-    <div class="row top"><span class="rec">REC</span><span>RSSI: -72dBm</span><span>02:28:00</span><span>GPS: 14</span><span>BAT: 23%</span></div>
-    <div class="row bot"><span>DIST: 1240m</span><span>GS: 119km/h</span></div>
-  </div>
-  <div class="t">
-    <div class="lbl">TARGET ACQUIRED</div>
-    <h1>Sam Vu</h1>
-    <p>Embedded &amp; Hardware · CS (Co-op) at the University of Waterloo</p>
-  </div>
-  <div class="hz"><i></i><span class="x"><b class="v"></b><b class="h"></b><s></s></span><i></i></div>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @font-face {
+        font-family: Inter;
+        font-weight: 700;
+        src: url(../node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2);
+      }
+      @font-face {
+        font-family: Inter;
+        font-weight: 400;
+        src: url(../node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2);
+      }
+      @font-face {
+        font-family: 'JetBrains Mono';
+        src: url(../node_modules/@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2);
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+      }
+      body {
+        background: #0a0b0c
+          repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.028) 0 1px, transparent 1px 3px);
+        color: #eef0f1;
+        font-family: Inter, sans-serif;
+        position: relative;
+      }
+      .f {
+        position: absolute;
+        inset: 36px 48px;
+      }
+      .c {
+        position: absolute;
+        width: 72px;
+        height: 46px;
+        border: 0 solid #eef0f1;
+      }
+      .tl {
+        left: 0;
+        top: 0;
+        border-width: 2px 0 0 2px;
+        border-top-left-radius: 10px;
+      }
+      .tr {
+        right: 0;
+        top: 0;
+        border-width: 2px 2px 0 0;
+        border-top-right-radius: 10px;
+      }
+      .bl {
+        left: 0;
+        bottom: 0;
+        border-width: 0 0 2px 2px;
+        border-bottom-left-radius: 10px;
+      }
+      .br {
+        right: 0;
+        bottom: 0;
+        border-width: 0 2px 2px 0;
+        border-bottom-right-radius: 10px;
+      }
+      .row {
+        position: absolute;
+        left: 36px;
+        right: 36px;
+        display: flex;
+        justify-content: space-between;
+        font:
+          16px 'JetBrains Mono',
+          monospace;
+        color: #b9c0c6;
+      }
+      .top {
+        top: 16px;
+      }
+      .bot {
+        bottom: 16px;
+        justify-content: space-around;
+      }
+      .rec::before {
+        content: '';
+        display: inline-block;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #ff3b3b;
+        margin-right: 8px;
+      }
+      .hz {
+        position: absolute;
+        left: 14%;
+        right: 14%;
+        top: 380px;
+        display: flex;
+        align-items: center;
+        gap: 26px;
+      }
+      .hz i {
+        flex: 1;
+        height: 2px;
+        background: #eef0f1;
+        opacity: 0.85;
+      }
+      .x {
+        position: relative;
+        width: 44px;
+        height: 44px;
+      }
+      .x b {
+        position: absolute;
+        background: #eef0f1;
+      }
+      .v {
+        left: 21px;
+        top: -22px;
+        width: 2px;
+        height: 88px;
+      }
+      .h {
+        left: -22px;
+        top: 21px;
+        width: 88px;
+        height: 2px;
+      }
+      .x s {
+        position: absolute;
+        left: 17px;
+        top: 17px;
+        width: 10px;
+        height: 10px;
+        background: #ff3b3b;
+      }
+      .t {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 150px;
+        text-align: center;
+      }
+      .lbl {
+        font:
+          16px 'JetBrains Mono',
+          monospace;
+        color: #8d969e;
+      }
+      h1 {
+        margin: 14px 0 16px;
+        font-size: 104px;
+        line-height: 1;
+        letter-spacing: -3px;
+        font-weight: 700;
+      }
+      p {
+        margin: 0;
+        font-size: 24px;
+        color: #b9c0c6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="f">
+      <span class="c tl"></span><span class="c tr"></span><span class="c bl"></span
+      ><span class="c br"></span>
+      <div class="row top">
+        <span class="rec">REC</span><span>RSSI: -72dBm</span><span>02:28:00</span
+        ><span>GPS: 14</span><span>BAT: 23%</span>
+      </div>
+      <div class="row bot"><span>DIST: 1240m</span><span>GS: 119km/h</span></div>
+    </div>
+    <div class="t">
+      <div class="lbl">TARGET ACQUIRED</div>
+      <h1>Sam Vu</h1>
+      <p>Embedded &amp; Hardware · CS (Co-op) at the University of Waterloo</p>
+    </div>
+    <div class="hz">
+      <i></i><span class="x"><b class="v"></b><b class="h"></b><s></s></span><i></i>
+    </div>
+  </body>
 </html>

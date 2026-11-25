@@ -10,17 +10,25 @@ const start = hudMap.hero!;
       <span class="hud__name">{profile.name}</span>
     </a>
     <nav class="hud__nav" aria-label="Sections">
-      {
-        sections.map((s) => (
-          <a href={`#${s.id}`} data-nav={s.sec}>
-            {s.label}
-          </a>
-        ))
-      }
+      {sections.map((s) => (
+        <a href={`#${s.id}`} data-nav={s.sec}>
+          {s.label}
+        </a>
+      ))}
     </nav>
     <div class="hud__readout" aria-hidden="true">
-      <span>SEC: <span class="hud__val" data-hud-sec>{start.label}</span></span>
-      <span>ALT: <span class="hud__val" data-hud-alt>{start.alt}m</span></span>
+      <span>
+        SEC:{' '}
+        <span class="hud__val" data-hud-sec>
+          {start.label}
+        </span>
+      </span>
+      <span>
+        ALT:{' '}
+        <span class="hud__val" data-hud-alt>
+          {start.alt}m
+        </span>
+      </span>
     </div>
   </div>
 </header>

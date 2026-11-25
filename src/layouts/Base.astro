@@ -40,7 +40,9 @@ const ogImage = new URL(meta.ogImage, Astro.site);
     <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
-    <a class="skip-link" href="#main">{meta.skipLink}</a>
+    <a class="skip-link" href="#main">
+      {meta.skipLink}
+    </a>
     <slot />
   </body>
 </html>

@@ -8,28 +8,54 @@ import { profile, fov } from '../data/site';
     <span class="fov__corner fov__corner--tr"></span>
     <span class="fov__corner fov__corner--bl"></span>
     <span class="fov__corner fov__corner--br"></span>
-    <div class="fov__row fov__row--top mono">{fov.top.map((t) => <span>{t}</span>)}</div>
-    <div class="fov__row fov__row--bottom mono">{fov.bottom.map((t) => <span>{t}</span>)}</div>
+    <div class="fov__row fov__row--top mono">
+      {fov.top.map((t) => (
+        <span>{t}</span>
+      ))}
+    </div>
+    <div class="fov__row fov__row--bottom mono">
+      {fov.bottom.map((t) => (
+        <span>{t}</span>
+      ))}
+    </div>
     <span class="fov__side fov__side--left mono">{fov.left}</span>
     <span class="fov__side fov__side--right mono">{fov.right}</span>
     <div class="fov__horizon">
       <span class="fov__line"></span>
-      <span class="fov__cross"><span class="fov__v"></span><span class="fov__h"></span><span class="fov__c"></span></span>
+      <span class="fov__cross">
+        <span class="fov__v"></span>
+        <span class="fov__h"></span>
+        <span class="fov__c"></span>
+      </span>
       <span class="fov__line"></span>
     </div>
   </div>
 
   <div class="hero__content">
     <div class="hero__id">
-      <span class="hero__label mono boot" style="animation-delay: 0.5s">{fov.label}</span>
-      <h1 id="hero-name" class="hero__name boot" style="animation-delay: 0.6s">{profile.name}</h1>
-      <p class="hero__tagline boot" style="animation-delay: 0.7s">{profile.tagline}</p>
+      <span class="hero__label mono boot" style="animation-delay: 0.5s">
+        {fov.label}
+      </span>
+      <h1 id="hero-name" class="hero__name boot" style="animation-delay: 0.6s">
+        {profile.name}
+      </h1>
+      <p class="hero__tagline boot" style="animation-delay: 0.7s">
+        {profile.tagline}
+      </p>
     </div>
     <div class="hero__actions boot" style="animation-delay: 0.85s">
-      <a class="btn btn--primary" href={profile.resume}>Resume</a>
-      <a class="btn" href={`mailto:${profile.email}`}>Email</a>
-      <a class="btn" href={profile.github} target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href={profile.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn--primary" href={profile.resume}>
+        Resume
+      </a>
+      <a class="btn" href={`mailto:${profile.email}`}>
+        Email
+      </a>
+      <a class="btn" href={profile.github} target="_blank" rel="noopener">
+        GitHub
+      </a>
+      <a class="btn" href={profile.linkedin} target="_blank" rel="noopener">
+        LinkedIn
+      </a>
     </div>
   </div>
 </section>

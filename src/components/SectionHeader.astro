@@ -8,8 +8,12 @@ interface Props {
 const { index, label, heading, id } = Astro.props;
 ---
 
-<span class="sec-label mono">{index} / {label.toUpperCase()}</span>
-<h2 class="sec-h2" id={`${id}-title`}>{heading}</h2>
+<span class="sec-label mono">
+  {index} / {label.toUpperCase()}
+</span>
+<h2 class="sec-h2" id={`${id}-title`}>
+  {heading}
+</h2>
 
 <style>
   .sec-label {

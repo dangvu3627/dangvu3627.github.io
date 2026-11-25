@@ -9,9 +9,13 @@ const id = `skill-${group.group.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 ---
 
 <div class="skg">
-  <h3 class="skg__label mono" id={id}>{group.group}</h3>
+  <h3 class="skg__label mono" id={id}>
+    {group.group}
+  </h3>
   <ul class="skg__items" aria-labelledby={id}>
-    {group.items.map((i) => <li>{i}</li>)}
+    {group.items.map((i) => (
+      <li>{i}</li>
+    ))}
   </ul>
 </div>
 

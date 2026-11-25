@@ -23,24 +23,45 @@ const sk = sec('skills');
     <div class="container">
       <About />
 
-      <section id={exp.id} data-sec={exp.sec} class="section reveal" aria-labelledby={`${exp.id}-title`}>
+      <section
+        id={exp.id}
+        data-sec={exp.sec}
+        class="section reveal"
+        aria-labelledby={`${exp.id}-title`}
+      >
         <SectionHeader {...exp} />
         <div class="stack">
-          {experience.map((job) => <ExperienceItem job={job} />)}
+          {experience.map((job) => (
+            <ExperienceItem job={job} />
+          ))}
         </div>
       </section>
 
-      <section id={proj.id} data-sec={proj.sec} class="section reveal" aria-labelledby={`${proj.id}-title`}>
+      <section
+        id={proj.id}
+        data-sec={proj.sec}
+        class="section reveal"
+        aria-labelledby={`${proj.id}-title`}
+      >
         <SectionHeader {...proj} />
         <div class="grid-projects">
-          {projects.map((p) => <ProjectCard project={p} />)}
+          {projects.map((p) => (
+            <ProjectCard project={p} />
+          ))}
         </div>
       </section>
 
-      <section id={sk.id} data-sec={sk.sec} class="section reveal" aria-labelledby={`${sk.id}-title`}>
+      <section
+        id={sk.id}
+        data-sec={sk.sec}
+        class="section reveal"
+        aria-labelledby={`${sk.id}-title`}
+      >
         <SectionHeader {...sk} />
         <div class="grid-skills">
-          {skills.map((g) => <SkillGroup group={g} />)}
+          {skills.map((g) => (
+            <SkillGroup group={g} />
+          ))}
         </div>
       </section>
     </div>

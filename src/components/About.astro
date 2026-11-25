@@ -19,15 +19,20 @@ const showTodo = !profile.about && import.meta.env.DEV;
     </div>
   </div>
   <div class="about__photo">
-    {
-      hasPhoto ? (
-        <img src={profile.photo} alt={meta.portraitAlt} width="560" height="700" loading="lazy" decoding="async" />
-      ) : (
-        <div class="about__placeholder" role="img" aria-label={meta.portraitAlt}>
-          {meta.photoPlaceholder}
-        </div>
-      )
-    }
+    {hasPhoto ? (
+      <img
+        src={profile.photo}
+        alt={meta.portraitAlt}
+        width="560"
+        height="700"
+        loading="lazy"
+        decoding="async"
+      />
+    ) : (
+      <div class="about__placeholder" role="img" aria-label={meta.portraitAlt}>
+        {meta.photoPlaceholder}
+      </div>
+    )}
     <span class="br br--tl" aria-hidden="true"></span>
     <span class="br br--tr" aria-hidden="true"></span>
     <span class="br br--bl" aria-hidden="true"></span>

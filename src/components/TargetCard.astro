@@ -11,7 +11,9 @@ const Tag = href ? 'a' : as === 'a' ? 'div' : as;
 const linkProps = href ? { href, target: '_blank', rel: 'noopener' } : {};
 ---
 
-<Tag class:list={['tgt', className]} {...linkProps} {...rest}><slot /></Tag>
+<Tag class:list={['tgt', className]} {...linkProps} {...rest}>
+  <slot />
+</Tag>
 
 <style>
   .tgt {
