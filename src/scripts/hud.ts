@@ -1,7 +1,6 @@
 import { hudMap } from '../data/site';
 
 const secEl = document.querySelector<HTMLElement>('[data-hud-sec]');
-const altEl = document.querySelector<HTMLElement>('[data-hud-alt]');
 const track = document.querySelector<HTMLElement>('[data-nav-track]');
 const pill = document.querySelector<HTMLElement>('[data-nav-pill]');
 const nav = track?.parentElement ?? null;
@@ -30,7 +29,6 @@ function render(): void {
   if (!entry || sec === current) return;
   current = sec;
   if (secEl) secEl.textContent = entry.label;
-  if (altEl) altEl.textContent = `${entry.alt}m`;
   let active: HTMLAnchorElement | undefined;
   links.forEach((a) => {
     if (a.dataset.nav === sec) {

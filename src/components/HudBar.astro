@@ -25,17 +25,8 @@ const start = hudMap.hero!;
       </div>
     </nav>
     <div class="hud__readout" aria-hidden="true">
-      <span>
-        SEC:{' '}
-        <span class="hud__val" data-hud-sec>
-          {start.label}
-        </span>
-      </span>
-      <span>
-        ALT:{' '}
-        <span class="hud__val" data-hud-alt>
-          {start.alt}m
-        </span>
+      <span class="hud__val" data-hud-sec>
+        {start.label}
       </span>
     </div>
   </div>
@@ -127,13 +118,11 @@ const start = hudMap.hero!;
     transition: clip-path var(--dur-pill) var(--ease-in-out);
   }
   .hud__readout {
-    display: flex;
-    gap: 18px;
-    color: var(--text-3);
     white-space: nowrap;
   }
   .hud__val {
-    color: var(--text);
+    color: var(--text-2);
+    letter-spacing: 0.04em;
   }
 
   @media (max-width: 860px) {

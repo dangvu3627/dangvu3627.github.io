@@ -131,13 +131,13 @@ export const sections = [
   { id: 'contact', sec: 'contact', label: 'Contact', index: '04', heading: "Let's talk." },
 ] as const;
 
-/** SEC / ALT readout per section: the drone "descends" as you scroll. */
-export const hudMap: Record<string, { label: string; alt: number }> = {
-  hero: { label: 'TAKE-OFF', alt: 154 },
-  experience: { label: 'EXPERIENCE', alt: 115 },
-  projects: { label: 'PROJECTS', alt: 77 },
-  skills: { label: 'SKILLS', alt: 38 },
-  contact: { label: 'LANDED', alt: 0 },
+/** Current-section label in the top-right of the HUD bar. */
+export const hudMap: Record<string, { label: string }> = {
+  hero: { label: 'INTRO' },
+  experience: { label: 'EXPERIENCE' },
+  projects: { label: 'PROJECTS' },
+  skills: { label: 'SKILLS' },
+  contact: { label: 'CONTACT' },
 };
 
 /** Static HUD readouts in the hero FOV frame (decorative). */

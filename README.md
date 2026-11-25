@@ -8,7 +8,7 @@ The site brings together my experience, projects and technical skills in embedde
 
 ## Concept
 
-The page is styled as a drone camera feed. It opens by powering up the drone's view: the field-of-view frame comes online, telemetry flickers in, the horizon and crosshair calibrate, then the reticle locks onto me as the target. From there, a live altitude readout "descends" as you scroll, landing at the contact section. The HUD theme stays in the frame and the motion, while the content reads like a clear, recruiter-friendly resume.
+The page is styled as a drone camera feed. It opens by powering up the drone's view: the field-of-view frame comes online, telemetry flickers in, the horizon and crosshair calibrate, then the reticle locks onto me as the target. From there, the HUD bar tracks which section you are in as you scroll. The HUD theme stays in the frame and the motion, while the content reads like a clear, recruiter-friendly resume.
 
 ## What's inside
 
