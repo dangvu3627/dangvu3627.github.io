@@ -1,0 +1,47 @@
+---
+import type { SkillGroup } from '../data/site';
+
+interface Props {
+  group: SkillGroup;
+}
+const { group } = Astro.props;
+const id = `skill-${group.group.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+---
+
+<div class="skg">
+  <h3 class="skg__label mono" id={id}>{group.group}</h3>
+  <ul class="skg__items" aria-labelledby={id}>
+    {group.items.map((i) => <li>{i}</li>)}
+  </ul>
+</div>
+
+<style>
+  .skg {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line-card);
+  }
+  .skg__label {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-3);
+    text-transform: uppercase;
+  }
+  .skg__items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 14px;
+  }
+  .skg__items li {
+    background: var(--surface-2);
+    border: 1px solid #23282d;
+    padding: 5px 10px;
+    border-radius: var(--radius-chip);
+  }
+</style>

@@ -1,0 +1,28 @@
+---
+interface Props {
+  index: string;
+  label: string;
+  heading: string;
+  id: string;
+}
+const { index, label, heading, id } = Astro.props;
+---
+
+<span class="sec-label mono">{index} / {label.toUpperCase()}</span>
+<h2 class="sec-h2" id={`${id}-title`}>{heading}</h2>
+
+<style>
+  .sec-label {
+    display: block;
+    font-size: 13px;
+    color: var(--accent);
+    /* Red on near-black is ~5.3:1, passes AA for this mono label */
+  }
+  .sec-h2 {
+    margin: 12px 0 28px;
+    font-size: 36px;
+    line-height: 1.1;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+  }
+</style>

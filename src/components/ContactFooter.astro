@@ -1,0 +1,76 @@
+---
+import { profile, sections, meta } from '../data/site';
+const s = sections.find((x) => x.id === 'contact')!;
+---
+
+<footer id={s.id} data-sec={s.sec} class="foot">
+  <div class="foot__inner container reveal">
+    <div class="foot__main">
+      <span class="foot__label mono">{s.index} / {s.label.toUpperCase()}</span>
+      <h2 class="foot__h2">{s.heading}</h2>
+      <a class="foot__email" href={`mailto:${profile.email}`}>{profile.email}</a>
+    </div>
+    <div class="foot__links mono">
+      <a href={profile.github} target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+      <a href={profile.linkedin} target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+      <span>{meta.copyright}</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .foot {
+    border-top: 1px solid var(--line);
+  }
+  .foot__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 28px;
+    padding-top: 80px;
+    padding-bottom: 48px;
+  }
+  .foot__main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .foot__label {
+    font-size: 13px;
+    color: var(--accent);
+  }
+  .foot__h2 {
+    font-size: 36px;
+    line-height: 1.1;
+    letter-spacing: -0.8px;
+  }
+  .foot__email {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 18px;
+    color: var(--text-2);
+    overflow-wrap: anywhere;
+  }
+  .foot__links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 20px;
+    font-size: 13px;
+    color: var(--text-3);
+  }
+  .foot__links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--text-2);
+  }
+  @media (max-width: 600px) {
+    .foot__inner {
+      padding-top: 64px;
+    }
+  }
+</style>

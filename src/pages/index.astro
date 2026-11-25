@@ -2,13 +2,50 @@
 import Base from '../layouts/Base.astro';
 import HudBar from '../components/HudBar.astro';
 import HeroFov from '../components/HeroFov.astro';
+import About from '../components/About.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import ExperienceItem from '../components/ExperienceItem.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import SkillGroup from '../components/SkillGroup.astro';
+import ContactFooter from '../components/ContactFooter.astro';
+import { sections, experience, projects, skills } from '../data/site';
+
+const sec = (id: string) => sections.find((s) => s.id === id)!;
+const exp = sec('experience');
+const proj = sec('projects');
+const sk = sec('skills');
 ---
 
 <Base>
   <HudBar />
   <main id="main" tabindex="-1">
     <HeroFov />
+    <div class="container">
+      <About />
+
+      <section id={exp.id} data-sec={exp.sec} class="section reveal" aria-labelledby={`${exp.id}-title`}>
+        <SectionHeader {...exp} />
+        <div class="stack">
+          {experience.map((job) => <ExperienceItem job={job} />)}
+        </div>
+      </section>
+
+      <section id={proj.id} data-sec={proj.sec} class="section reveal" aria-labelledby={`${proj.id}-title`}>
+        <SectionHeader {...proj} />
+        <div class="grid-projects">
+          {projects.map((p) => <ProjectCard project={p} />)}
+        </div>
+      </section>
+
+      <section id={sk.id} data-sec={sk.sec} class="section reveal" aria-labelledby={`${sk.id}-title`}>
+        <SectionHeader {...sk} />
+        <div class="grid-skills">
+          {skills.map((g) => <SkillGroup group={g} />)}
+        </div>
+      </section>
+    </div>
   </main>
+  <ContactFooter />
   <script>
     import '../scripts/hud.ts';
   </script>

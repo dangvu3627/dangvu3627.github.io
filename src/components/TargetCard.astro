@@ -1,0 +1,73 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = HTMLAttributes<'div'> & {
+  as?: 'article' | 'a' | 'div';
+  href?: string | null;
+};
+
+const { as = 'div', href, class: className, ...rest } = Astro.props;
+const Tag = href ? 'a' : as === 'a' ? 'div' : as;
+const linkProps = href ? { href, target: '_blank', rel: 'noopener' } : {};
+---
+
+<Tag class:list={['tgt', className]} {...linkProps} {...rest}><slot /></Tag>
+
+<style>
+  .tgt {
+    position: relative;
+    display: block;
+    background: var(--surface);
+    border: 1px solid var(--line-card);
+    border-radius: var(--radius-card);
+    color: inherit;
+    text-decoration: none;
+    transition:
+      border-color 0.2s,
+      background-color 0.2s;
+  }
+  .tgt::before,
+  .tgt::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      opacity 0.2s,
+      transform 0.2s var(--ease);
+  }
+  .tgt::before {
+    left: -6px;
+    top: -6px;
+    border-left: 2px solid var(--accent);
+    border-top: 2px solid var(--accent);
+    transform: translate(-6px, -6px);
+  }
+  .tgt::after {
+    right: -6px;
+    bottom: -6px;
+    border-right: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+    transform: translate(6px, 6px);
+  }
+  .tgt:hover,
+  .tgt:focus-visible,
+  .tgt:focus-within {
+    border-color: var(--line-strong);
+    background: var(--surface-hover);
+  }
+  .tgt:hover::before,
+  .tgt:hover::after,
+  .tgt:focus-visible::before,
+  .tgt:focus-visible::after,
+  .tgt:focus-within::before,
+  .tgt:focus-within::after {
+    opacity: 1;
+    transform: none;
+  }
+  a.tgt:hover {
+    color: inherit;
+  }
+</style>

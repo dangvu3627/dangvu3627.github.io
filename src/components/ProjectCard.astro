@@ -1,0 +1,103 @@
+---
+import TargetCard from './TargetCard.astro';
+import type { Project } from '../data/site';
+import { publicAssetExists } from '../lib/assets';
+
+interface Props {
+  project: Project;
+}
+const { project: p } = Astro.props;
+const hasImage = publicAssetExists(p.image);
+---
+
+<TargetCard as="article" href={p.url} class="proj">
+  <div class="proj__shot">
+    {
+      hasImage ? (
+        <img src={p.image} alt="" width="960" height="480" loading="lazy" decoding="async" />
+      ) : (
+        <span class="proj__ph mono" aria-hidden="true">{p.name}</span>
+      )
+    }
+  </div>
+  <div class="proj__body">
+    <div class="proj__head">
+      <h3 class="proj__name">
+        {p.name}{p.url && <span class="visually-hidden"> (opens repository)</span>}
+      </h3>
+      <span class="proj__date mono">{p.date}</span>
+    </div>
+    <p class="proj__desc">{p.desc}</p>
+    <ul class="proj__tags mono" aria-label="Technologies">
+      {p.tags.map((t) => <li>{t}</li>)}
+    </ul>
+  </div>
+</TargetCard>
+
+<style>
+  .proj {
+    display: flex;
+    flex-direction: column;
+  }
+  .proj__shot {
+    aspect-ratio: 16 / 8;
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--line-card);
+    border-radius: var(--radius-card) var(--radius-card) 0 0;
+    overflow: hidden;
+  }
+  .proj__shot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .proj__ph {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-3);
+    font-size: 13px;
+  }
+  .proj__body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px 22px 22px;
+  }
+  .proj__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .proj__name {
+    font-size: 18px;
+    line-height: 1.4;
+    font-weight: 600;
+  }
+  .proj__date {
+    font-size: 12px;
+    color: var(--text-3);
+    white-space: nowrap;
+  }
+  .proj__desc {
+    color: var(--text-2);
+    font-size: 15px;
+  }
+  .proj__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 4px 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 12px;
+    color: var(--text-2);
+  }
+  .proj__tags li {
+    border: 1px solid #2a3036;
+    padding: 3px 8px;
+    border-radius: var(--radius-chip);
+  }
+</style>
