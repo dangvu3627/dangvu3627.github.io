@@ -113,11 +113,13 @@ const start = hudMap.hero!;
     display: flex;
     gap: 4px;
     pointer-events: none;
+    /* One continuous fill: per-label backgrounds left the 4px gaps dark, which
+       flashed as a black bar while the clip slid across two links. */
+    background: var(--text);
     /* Collapsed until hud.ts measures the active link */
     clip-path: inset(4px 100% 4px 0 round 6px);
   }
   .hud__pill span {
-    background: var(--text);
     color: var(--bg);
   }
   /* Set by hud.ts after the first measurement, so the pill never animates in on load */
