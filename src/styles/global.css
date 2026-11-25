@@ -96,29 +96,12 @@ p {
     transform: translateY(16px);
   }
 }
-/* Hero boot: rise + a 4px focus pull, like the camera locking onto the target */
-@keyframes boot {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-    filter: blur(4px);
-  }
-}
-@keyframes grow {
-  from {
-    opacity: 0;
-    transform: scale(0.6);
-  }
-}
 @keyframes blink {
   50% {
     opacity: 0.15;
   }
 }
 
-.boot {
-  animation: boot 0.7s var(--ease) both;
-}
 .blink {
   animation: blink 1.2s steps(1) infinite;
 }

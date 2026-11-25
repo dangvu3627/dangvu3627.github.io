@@ -8,11 +8,11 @@ The site brings together my experience, projects and technical skills in embedde
 
 ## Concept
 
-The page is styled as a drone camera feed: a heads-up display with a field-of-view frame, crosshair, telemetry readouts and a live altitude readout that "descends" as you scroll, landing at the contact section. The HUD theme stays in the frame and the motion, while the content reads like a clear, recruiter-friendly resume.
+The page is styled as a drone camera feed. It opens by powering up the drone's view: the field-of-view frame comes online, telemetry flickers in, the horizon and crosshair calibrate, then the reticle locks onto me as the target. From there, a live altitude readout "descends" as you scroll, landing at the contact section. The HUD theme stays in the frame and the motion, while the content reads like a clear, recruiter-friendly resume.
 
 ## What's inside
 
-- **About:** who I am, my degree and my scholarship
+- **Intro:** who I am, my degree and my scholarship, right in the opening view
 - **Experience:** embedded flight software at WARG and robotics team leadership
 - **Projects:** hardware and software builds, each linked to its source
 - **Skills:** languages, microcontrollers, protocols, embedded concepts, hardware and tools

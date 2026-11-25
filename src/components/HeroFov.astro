@@ -1,5 +1,23 @@
 ---
-import { profile, fov, cta } from '../data/site';
+import { profile, fov, cta, meta } from '../data/site';
+import { publicAssetExists } from '../lib/assets';
+import { isDev } from '../lib/env';
+
+const hasPhoto = publicAssetExists(profile.photo);
+const showTodo = !profile.about && isDev;
+
+/*
+ * Boot sequence (ms from load), all CSS, plays once:
+ *    0  feed flickers on, FOV frame expands (700)
+ *  260  telemetry readouts flicker in, 60ms apart
+ *  380  crosshair focuses; 480 horizon draws outward from it (450)
+ *  950  portrait resolves; 1000 target brackets lock onto it (380)
+ * 1000  reticle fades away (250), clear before text arrives; 1300 "TARGET ACQUIRED" tag
+ * 1100+ name, line, buttons, about content enter 80ms apart (500 each) -> done ~1.85s
+ */
+const t = (ms: number) => `--d: ${ms}ms`;
+const tele = (i: number) => `--i: ${i}`;
+const bottomStart = fov.top.length + 2;
 ---
 
 <section id="top" data-sec="hero" class="hero" aria-labelledby="hero-name">
@@ -9,55 +27,94 @@ import { profile, fov, cta } from '../data/site';
     <span class="fov__corner fov__corner--bl"></span>
     <span class="fov__corner fov__corner--br"></span>
     <div class="fov__row fov__row--top mono">
-      {fov.top.map((t) => (
-        <span>{t}</span>
+      {fov.top.map((v, i) => (
+        <span class:list={['tele', { rec: i === 0 }]} style={tele(i)}>
+          {v}
+        </span>
       ))}
     </div>
     <div class="fov__row fov__row--bottom mono">
-      {fov.bottom.map((t) => (
-        <span>{t}</span>
+      {fov.bottom.map((v, i) => (
+        <span class="tele" style={tele(bottomStart + i)}>
+          {v}
+        </span>
       ))}
     </div>
-    <span class="fov__side fov__side--left mono">{fov.left}</span>
-    <span class="fov__side fov__side--right mono">{fov.right}</span>
-    <div class="fov__horizon">
-      <span class="fov__line"></span>
+    <span class="fov__side fov__side--left mono tele" style={tele(fov.top.length)}>
+      {fov.left}
+    </span>
+    <span class="fov__side fov__side--right mono tele" style={tele(fov.top.length + 1)}>
+      {fov.right}
+    </span>
+    <div class="fov__reticle">
+      <span class="fov__line fov__line--l"></span>
       <span class="fov__cross">
         <span class="fov__v"></span>
         <span class="fov__h"></span>
         <span class="fov__c"></span>
       </span>
-      <span class="fov__line"></span>
+      <span class="fov__line fov__line--r"></span>
     </div>
   </div>
 
-  <div class="hero__content">
-    <div class="hero__id">
-      <span class="hero__label mono boot" style="animation-delay: 0.5s">
-        {fov.label}
-      </span>
-      <h1 id="hero-name" class="hero__name boot" style="animation-delay: 0.6s">
+  <div class="hero__grid">
+    <div class="hero__text">
+      <h1 id="hero-name" class="hero__name enter" style={t(1100)}>
         {profile.name}
       </h1>
-      <p class="hero__tagline boot" style="animation-delay: 0.7s">
+      <p class="hero__tagline enter" style={t(1180)}>
         {profile.tagline}
       </p>
-    </div>
-    <div class="hero__actions boot" style="animation-delay: 0.85s">
-      <div class="hero__row">
-        <a class="btn btn--primary" href={profile.resume}>
-          {cta.resume}
-        </a>
-        <a class="btn" href={profile.github} target="_blank" rel="noopener">
-          {cta.github}
-        </a>
-        <a class="btn" href={profile.linkedin} target="_blank" rel="noopener">
-          {cta.linkedin}
+      <div class="hero__actions enter" style={t(1260)}>
+        <div class="hero__row">
+          <a class="btn btn--primary" href={profile.resume}>
+            {cta.resume}
+          </a>
+          <a class="btn" href={profile.github} target="_blank" rel="noopener">
+            {cta.github}
+          </a>
+          <a class="btn" href={profile.linkedin} target="_blank" rel="noopener">
+            {cta.linkedin}
+          </a>
+        </div>
+        <a class="btn" href={`mailto:${profile.email}`}>
+          {cta.contact}
         </a>
       </div>
-      <a class="btn btn--contact" href={`mailto:${profile.email}`}>
-        {cta.contact}
-      </a>
+      <div class="hero__about enter" style={t(1340)}>
+        {profile.about && <p class="hero__bio">{profile.about}</p>}
+        {showTodo && <p class="hero__bio hero__todo">{meta.aboutTodo}</p>}
+        <ul class="hero__meta mono">
+          <li>{profile.education}</li>
+          <li>{profile.award}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="hero__target">
+      <div class="hero__photo">
+        {hasPhoto ? (
+          <img
+            src={profile.photo}
+            alt={meta.portraitAlt}
+            width="560"
+            height="700"
+            fetchpriority="high"
+            decoding="async"
+          />
+        ) : (
+          <div class="hero__placeholder" role="img" aria-label={meta.portraitAlt}>
+            {meta.photoPlaceholder}
+          </div>
+        )}
+      </div>
+      <span class="lock lock--tl" aria-hidden="true"></span>
+      <span class="lock lock--tr" aria-hidden="true"></span>
+      <span class="lock lock--bl" aria-hidden="true"></span>
+      <span class="lock lock--br" aria-hidden="true"></span>
+      <span class="hero__tag mono" aria-hidden="true">
+        {fov.label}
+      </span>
     </div>
   </div>
 </section>
@@ -65,11 +122,10 @@ import { profile, fov, cta } from '../data/site';
 <style>
   .hero {
     position: relative;
-    min-height: 680px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 60px var(--gutter);
+    min-height: max(680px, calc(100svh - 57px));
+    display: grid;
+    place-items: center;
+    padding: 96px max(56px, 7vw) 92px;
     overflow: hidden;
   }
 
@@ -81,7 +137,6 @@ import { profile, fov, cta } from '../data/site';
     top: 28px;
     bottom: 28px;
     pointer-events: none;
-    animation: grow 0.9s var(--ease) both;
   }
   .fov__corner {
     position: absolute;
@@ -143,20 +198,42 @@ import { profile, fov, cta } from '../data/site';
   .fov__side--right {
     right: 20px;
   }
-  .fov__horizon {
+  .rec::before {
+    content: '';
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    vertical-align: 1px;
+    animation: blink 1.2s steps(1) infinite;
+  }
+
+  /* Horizon + crosshair: only shown while booting. Its resting state is hidden,
+     so with motion off it never sits across the content. */
+  .fov__reticle {
     position: absolute;
     left: 16%;
     right: 16%;
-    top: calc(50% + 9px);
+    top: 50%;
+    translate: 0 -50%;
     display: flex;
     align-items: center;
     gap: 24px;
+    opacity: 0;
   }
   .fov__line {
     flex: 1;
     height: 2px;
     background: var(--text);
     opacity: 0.85;
+  }
+  .fov__line--l {
+    transform-origin: right center;
+  }
+  .fov__line--r {
+    transform-origin: left center;
   }
   .fov__cross {
     position: relative;
@@ -192,31 +269,19 @@ import { profile, fov, cta } from '../data/site';
   }
 
   /* ---------- Content ---------- */
-  /* Two equal rows around a 120px gap: the gap's centre always sits on the
-     horizon line (frame centre + 9px offset + 22px half crosshair = +31px). */
-  .hero {
-    align-items: stretch;
-  }
-  .hero__content {
+  .hero__grid {
     position: relative;
-    max-width: 760px;
+    width: 100%;
+    max-width: 980px;
     display: grid;
-    grid-template-rows: 1fr 1fr;
-    justify-items: center;
-    row-gap: 120px;
-    text-align: center;
-    transform: translateY(31px);
+    grid-template-columns: minmax(0, 1fr) 280px;
+    align-items: center;
+    gap: 48px 88px;
   }
-  .hero__id {
+  .hero__text {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 12px;
-  }
-  .hero__label {
-    font-size: 13px;
-    color: var(--text-3);
+    align-items: flex-start;
   }
   .hero__name {
     font-size: clamp(44px, 7vw, 76px);
@@ -225,23 +290,128 @@ import { profile, fov, cta } from '../data/site';
     letter-spacing: -2px;
   }
   .hero__tagline {
+    margin-top: 16px;
+    max-width: 34em;
     font-size: 18px;
     color: var(--text-2);
     text-wrap: balance;
   }
-  /* Resume / GitHub / LinkedIn on one row; Contact me spans that row's width below it. */
   .hero__actions {
     display: inline-grid;
-    align-content: start;
-    justify-self: center;
     gap: 10px;
+    margin-top: 32px;
   }
   .hero__row {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 10px;
   }
+  .hero__about {
+    align-self: stretch;
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+  .hero__bio {
+    max-width: 62ch;
+    color: var(--text-2);
+  }
+  .hero__bio + .hero__meta {
+    margin-top: 16px;
+  }
+  .hero__todo {
+    border: 1px dashed var(--line-strong);
+    padding: 12px 14px;
+    border-radius: var(--radius-chip);
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
+  .hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 28px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 13px;
+    color: var(--text-3);
+  }
+  .hero__meta li {
+    text-wrap: balance;
+  }
+
+  /* Portrait: the "target" */
+  .hero__target {
+    position: relative;
+    width: 280px;
+    aspect-ratio: 4 / 5;
+    margin-bottom: 30px; /* room for the tag */
+  }
+  .hero__photo,
+  .hero__photo img,
+  .hero__placeholder {
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-chip);
+  }
+  .hero__photo img {
+    object-fit: cover;
+    outline: 1px solid var(--image-outline);
+    outline-offset: -1px;
+  }
+  .hero__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface-2);
+    border: 1px solid var(--line-card);
+    color: var(--text-3);
+    font-size: 14px;
+  }
+  .lock {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border: 0 solid var(--accent);
+  }
+  .lock--tl {
+    left: -10px;
+    top: -10px;
+    border-width: 2px 0 0 2px;
+    --lx: -36px;
+    --ly: -36px;
+  }
+  .lock--tr {
+    right: -10px;
+    top: -10px;
+    border-width: 2px 2px 0 0;
+    --lx: 36px;
+    --ly: -36px;
+  }
+  .lock--bl {
+    left: -10px;
+    bottom: -10px;
+    border-width: 0 0 2px 2px;
+    --lx: -36px;
+    --ly: 36px;
+  }
+  .lock--br {
+    right: -10px;
+    bottom: -10px;
+    border-width: 0 2px 2px 0;
+    --lx: 36px;
+    --ly: 36px;
+  }
+  .hero__tag {
+    position: absolute;
+    left: -10px;
+    top: calc(100% + 18px);
+    font-size: 12px;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  /* ---------- Buttons ---------- */
   .btn {
     display: inline-flex;
     align-items: center;
@@ -275,19 +445,160 @@ import { profile, fov, cta } from '../data/site';
       color: var(--bg);
     }
   }
-  /* Press feedback */
   .btn:active {
     scale: 0.96;
   }
 
+  /* ---------- Boot sequence ---------- */
+  .fov {
+    animation: fov-on 700ms var(--ease) both;
+  }
+  .tele {
+    animation: tele-on 360ms steps(1, end) both;
+    animation-delay: calc(260ms + var(--i) * 60ms);
+  }
+  .fov__reticle {
+    animation: reticle 1250ms linear both;
+  }
+  .fov__cross {
+    animation: cross-on 260ms var(--ease-out) 380ms both;
+  }
+  .fov__line {
+    animation: line-draw 450ms var(--ease-out) 480ms both;
+  }
+  .hero__photo {
+    animation: resolve 450ms var(--ease) 950ms both;
+  }
+  .lock {
+    animation: lock-on 380ms var(--ease-out) 1000ms both;
+  }
+  .hero__tag {
+    animation: tele-on 360ms steps(1, end) 1300ms both;
+  }
+  .enter {
+    animation: enter 500ms var(--ease) both;
+    animation-delay: var(--d);
+  }
+
+  /* Feed connecting: a short signal flicker while the frame opens out */
+  @keyframes fov-on {
+    0% {
+      opacity: 0;
+      transform: scale(0.6);
+    }
+    12% {
+      opacity: 0.85;
+    }
+    20% {
+      opacity: 0.2;
+    }
+    32% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes tele-on {
+    0% {
+      opacity: 0;
+    }
+    30% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.25;
+    }
+    70%,
+    100% {
+      opacity: 1;
+    }
+  }
+  /* Visible from the start, held until the lock (1000ms), gone by 1250ms */
+  @keyframes reticle {
+    0%,
+    80% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes cross-on {
+    from {
+      opacity: 0;
+      transform: scale(1.4);
+    }
+  }
+  @keyframes line-draw {
+    from {
+      transform: scaleX(0);
+    }
+  }
+  @keyframes resolve {
+    from {
+      opacity: 0;
+      filter: blur(6px);
+    }
+  }
+  @keyframes lock-on {
+    from {
+      opacity: 0;
+      transform: translate(var(--lx), var(--ly));
+    }
+  }
+  @keyframes enter {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+      filter: blur(4px);
+    }
+  }
+
+  /* ---------- Responsive ---------- */
+  /* Side readouts need clear space beside the content column */
+  @media (max-width: 1360px) {
+    .fov__side {
+      display: none;
+    }
+  }
+  @media (max-width: 860px) {
+    .hero {
+      padding-top: 84px;
+    }
+    .hero__grid {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      text-align: center;
+      gap: 36px;
+    }
+    .hero__text {
+      align-items: center;
+    }
+    .hero__row {
+      justify-content: center;
+    }
+    .hero__meta {
+      justify-content: center;
+    }
+    .hero__bio {
+      margin-inline: auto;
+    }
+    .hero__target {
+      order: -1;
+      width: 168px;
+    }
+    .hero__tag {
+      left: 50%;
+      translate: -50% 0;
+    }
+  }
   @media (max-width: 600px) {
     .hero {
       min-height: 560px;
+      padding: 100px 40px 64px;
     }
-    .btn {
-      padding: 0 16px;
-    }
-    .fov__side,
     .fov__row--bottom {
       display: none;
     }
@@ -300,12 +611,18 @@ import { profile, fov, cta } from '../data/site';
     .fov__row--top span:nth-child(2) {
       display: none;
     }
-    .fov__horizon {
+    .fov__reticle {
       left: 8%;
       right: 8%;
     }
+    .hero__target {
+      width: 136px;
+    }
     .hero__tagline {
       font-size: 16px;
+    }
+    .btn {
+      padding: 0 16px;
     }
   }
 </style>

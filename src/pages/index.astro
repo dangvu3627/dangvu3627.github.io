@@ -2,7 +2,6 @@
 import Base from '../layouts/Base.astro';
 import HudBar from '../components/HudBar.astro';
 import HeroFov from '../components/HeroFov.astro';
-import About from '../components/About.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import ExperienceItem from '../components/ExperienceItem.astro';
 import ProjectCard from '../components/ProjectCard.astro';
@@ -21,8 +20,6 @@ const sk = sec('skills');
   <main id="main" tabindex="-1">
     <HeroFov />
     <div class="container">
-      <About />
-
       <section
         id={exp.id}
         data-sec={exp.sec}

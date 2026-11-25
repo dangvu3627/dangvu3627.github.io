@@ -124,20 +124,19 @@ export const skills: SkillGroup[] = [
 
 /** Section labels and nav, kept here so components hold no copy. */
 export const sections = [
-  { id: 'about', sec: 'about', label: 'About', index: '01', heading: 'About me' },
-  { id: 'experience', sec: 'experience', label: 'Experience', index: '02', heading: 'Experience' },
-  { id: 'projects', sec: 'projects', label: 'Projects', index: '03', heading: 'Projects' },
-  { id: 'skills', sec: 'skills', label: 'Skills', index: '04', heading: 'Skills' },
-  { id: 'contact', sec: 'contact', label: 'Contact', index: '05', heading: "Let's talk." },
+  // About lives in the hero (#top), so it has no section or nav link of its own.
+  { id: 'experience', sec: 'experience', label: 'Experience', index: '01', heading: 'Experience' },
+  { id: 'projects', sec: 'projects', label: 'Projects', index: '02', heading: 'Projects' },
+  { id: 'skills', sec: 'skills', label: 'Skills', index: '03', heading: 'Skills' },
+  { id: 'contact', sec: 'contact', label: 'Contact', index: '04', heading: "Let's talk." },
 ] as const;
 
 /** SEC / ALT readout per section: the drone "descends" as you scroll. */
 export const hudMap: Record<string, { label: string; alt: number }> = {
   hero: { label: 'TAKE-OFF', alt: 154 },
-  about: { label: 'ABOUT', alt: 120 },
-  experience: { label: 'EXPERIENCE', alt: 90 },
-  projects: { label: 'PROJECTS', alt: 60 },
-  skills: { label: 'SKILLS', alt: 30 },
+  experience: { label: 'EXPERIENCE', alt: 115 },
+  projects: { label: 'PROJECTS', alt: 77 },
+  skills: { label: 'SKILLS', alt: 38 },
   contact: { label: 'LANDED', alt: 0 },
 };
 
@@ -148,6 +147,7 @@ export const fov = {
   left: 'V.S.: 0.0',
   right: 'ALT: 154m',
   label: 'TARGET ACQUIRED',
+  lock: 'TGT LOCK',
 };
 
 /** Hero buttons and contact copy. */
