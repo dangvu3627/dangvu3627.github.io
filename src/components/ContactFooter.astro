@@ -1,5 +1,5 @@
 ---
-import { profile, sections, meta } from '../data/site';
+import { profile, sections, meta, contact } from '../data/site';
 const s = sections.find((x) => x.id === 'contact')!;
 ---
 
@@ -10,6 +10,7 @@ const s = sections.find((x) => x.id === 'contact')!;
         {s.index} / {s.label.toUpperCase()}
       </span>
       <h2 class="foot__h2">{s.heading}</h2>
+      <p class="foot__pitch">{contact.pitch}</p>
       <a class="foot__email" href={`mailto:${profile.email}`}>
         {profile.email}
       </a>
@@ -54,6 +55,13 @@ const s = sections.find((x) => x.id === 'contact')!;
     line-height: 1.1;
     letter-spacing: -0.8px;
   }
+  .foot__pitch {
+    max-width: 52ch;
+    margin-top: 6px;
+    font-size: 18px;
+    color: var(--text-2);
+    text-wrap: pretty;
+  }
   .foot__email,
   .foot__links a {
     transition: color var(--dur-hover) ease;
@@ -69,7 +77,7 @@ const s = sections.find((x) => x.id === 'contact')!;
     align-items: center;
     min-height: 44px;
     font-size: 18px;
-    color: var(--text-2);
+    color: var(--text);
     overflow-wrap: anywhere;
   }
   .foot__links {

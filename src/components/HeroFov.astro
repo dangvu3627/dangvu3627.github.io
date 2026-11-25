@@ -1,5 +1,5 @@
 ---
-import { profile, fov } from '../data/site';
+import { profile, fov, cta } from '../data/site';
 ---
 
 <section id="top" data-sec="hero" class="hero" aria-labelledby="hero-name">
@@ -44,17 +44,19 @@ import { profile, fov } from '../data/site';
       </p>
     </div>
     <div class="hero__actions boot" style="animation-delay: 0.85s">
-      <a class="btn btn--primary" href={profile.resume}>
-        Resume
-      </a>
-      <a class="btn" href={`mailto:${profile.email}`}>
-        Email
-      </a>
-      <a class="btn" href={profile.github} target="_blank" rel="noopener">
-        GitHub
-      </a>
-      <a class="btn" href={profile.linkedin} target="_blank" rel="noopener">
-        LinkedIn
+      <div class="hero__row">
+        <a class="btn btn--primary" href={profile.resume}>
+          {cta.resume}
+        </a>
+        <a class="btn" href={profile.github} target="_blank" rel="noopener">
+          {cta.github}
+        </a>
+        <a class="btn" href={profile.linkedin} target="_blank" rel="noopener">
+          {cta.linkedin}
+        </a>
+      </div>
+      <a class="btn btn--contact" href={`mailto:${profile.email}`}>
+        {cta.contact}
       </a>
     </div>
   </div>
@@ -227,11 +229,17 @@ import { profile, fov } from '../data/site';
     color: var(--text-2);
     text-wrap: balance;
   }
+  /* Resume / GitHub / LinkedIn on one row; Contact me spans that row's width below it. */
   .hero__actions {
+    display: inline-grid;
+    align-content: start;
+    justify-self: center;
+    gap: 10px;
+  }
+  .hero__row {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-content: flex-start;
     gap: 10px;
   }
   .btn {
@@ -275,6 +283,9 @@ import { profile, fov } from '../data/site';
   @media (max-width: 600px) {
     .hero {
       min-height: 560px;
+    }
+    .btn {
+      padding: 0 16px;
     }
     .fov__side,
     .fov__row--bottom {

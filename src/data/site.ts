@@ -150,6 +150,19 @@ export const fov = {
   label: 'TARGET ACQUIRED',
 };
 
+/** Hero buttons and contact copy. */
+export const cta = {
+  resume: 'Resume',
+  github: 'GitHub',
+  linkedin: 'LinkedIn',
+  contact: 'Contact me',
+};
+
+export const contact = {
+  pitch:
+    "Looking for a Summer 2027 co-op. If you're building something interesting, I'd love to hear from you.",
+};
+
 export const meta = {
   title: 'Sam Vu · Embedded & Hardware Portfolio',
   description: `Sam Vu: ${profile.tagline}.`,
