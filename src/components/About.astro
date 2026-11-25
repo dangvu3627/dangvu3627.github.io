@@ -2,10 +2,11 @@
 import SectionHeader from './SectionHeader.astro';
 import { profile, sections, meta } from '../data/site';
 import { publicAssetExists } from '../lib/assets';
+import { isDev } from '../lib/env';
 
 const s = sections.find((x) => x.id === 'about')!;
 const hasPhoto = publicAssetExists(profile.photo);
-const showTodo = !profile.about && import.meta.env.DEV;
+const showTodo = !profile.about && isDev;
 ---
 
 <section id={s.id} data-sec={s.sec} class="section about reveal" aria-labelledby={`${s.id}-title`}>
