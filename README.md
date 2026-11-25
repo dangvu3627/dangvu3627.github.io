@@ -1,33 +1,23 @@
-# Sam Vu · Portfolio (Drone HUD, dark)
+# Sam Vu · Portfolio
 
-Single-page static portfolio built with Astro 5, TypeScript and plain CSS. Full spec: `Portfolio site build spec (Drone HUD, dark).md`.
+**Live:** [dangvu3627.github.io](https://dangvu3627.github.io/)
 
-## Commands
+My personal portfolio. I'm a Computer Science (Co-op) student at the University of Waterloo with a Digital Hardware Specialization, writing embedded flight software at the Waterloo Aerial Robotics Group (WARG).
 
-| Command | What it does |
-| --- | --- |
-| `npm install` | Install dependencies |
-| `npm run dev` | Dev server at http://localhost:4321 (shows a TODO where the About paragraph is empty) |
-| `npm run build` | `astro check` + static build to `dist/` |
-| `npm run preview` | Serve the built site |
-| `npm run format` | Prettier |
+The site brings together my experience, projects and technical skills in embedded systems and hardware, from STM32 firmware and CAN logging to a flight-tested Arduino quadcopter, so recruiters and collaborators can find what I work on and how to reach me.
 
-## Updating content
+## Concept
 
-All copy lives in `src/data/site.ts`. Components hold no text.
+The page is styled as a drone camera feed: a heads-up display with a field-of-view frame, crosshair, telemetry readouts and a live altitude readout that "descends" as you scroll, landing at the contact section. The HUD theme stays in the frame and the motion, while the content reads like a clear, recruiter-friendly resume.
 
-- **About paragraph:** set `profile.about`.
-- **Portrait:** add `public/img/sam.jpg` (4:5, 560×700). Until then a placeholder shows.
-- **Resume:** add `public/resume.pdf`. The Resume button links to it.
-- **Project screenshots:** add `public/img/projects/<name>.webp` (960×480), matching each project's `image`. Missing files show a placeholder with the project name.
-- A project with `url: null` renders as a plain (non-link) card.
+## What's inside
 
-## Deploying
+- **About:** who I am, my degree and my scholarship
+- **Experience:** embedded flight software at WARG and robotics team leadership
+- **Projects:** hardware and software builds, each linked to its source
+- **Skills:** languages, microcontrollers, protocols, embedded concepts, hardware and tools
+- **Contact:** email, GitHub and LinkedIn
 
-`.github/workflows/deploy.yml` builds and deploys to GitHub Pages on every push to `main`. In the repo settings, set **Pages → Source** to **GitHub Actions**. The site URL is set in `astro.config.mjs` (`site`) and `public/robots.txt`; change both if you use a custom domain.
+## Built with
 
-Lighthouse CI (`.github/workflows/lighthouse.yml`, `lighthouserc.json`) runs on pull requests and fails below 95 in any category.
-
-## Open Graph image
-
-`public/og.png` is rendered once from `tools/og.html` at 1200×630 with a headless browser. Re-render it if the name or tagline changes.
+Astro and TypeScript with plain CSS, as a fast, static, accessible single page.
