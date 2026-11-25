@@ -10,11 +10,19 @@ const start = hudMap.hero!;
       <span class="hud__name">{profile.name}</span>
     </a>
     <nav class="hud__nav" aria-label="Sections">
-      {sections.map((s) => (
-        <a href={`#${s.id}`} data-nav={s.sec}>
-          {s.label}
-        </a>
-      ))}
+      <div class="hud__track" data-nav-track>
+        {sections.map((s) => (
+          <a href={`#${s.id}`} data-nav={s.sec}>
+            {s.label}
+          </a>
+        ))}
+        <!-- Active pill: a copy of the list in the active style, clipped to the active link. -->
+        <div class="hud__pill" data-nav-pill aria-hidden="true">
+          {sections.map((s) => (
+            <span>{s.label}</span>
+          ))}
+        </div>
+      </div>
     </nav>
     <div class="hud__readout" aria-hidden="true">
       <span>
@@ -74,27 +82,47 @@ const start = hudMap.hero!;
   .hud__nav {
     display: flex;
     justify-content: center;
+  }
+  .hud__track {
+    position: relative;
+    display: flex;
     gap: 4px;
   }
-  .hud__nav a {
+  .hud__track a,
+  .hud__pill span {
     display: inline-flex;
     align-items: center;
     min-height: 44px;
     padding: 0 12px;
+    white-space: nowrap;
+  }
+  .hud__track a {
     border-radius: 6px;
     color: var(--text-2);
     text-decoration: none;
-    white-space: nowrap;
-    transition:
-      background-color 0.2s,
-      color 0.2s;
+    transition: color var(--dur-hover) ease;
   }
-  .hud__nav a:hover {
-    color: var(--text);
+  @media (hover: hover) {
+    .hud__track a:hover {
+      color: var(--text);
+    }
   }
-  .hud__nav a[aria-current='true'] {
+  .hud__pill {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    gap: 4px;
+    pointer-events: none;
+    /* Collapsed until hud.ts measures the active link */
+    clip-path: inset(4px 100% 4px 0 round 6px);
+  }
+  .hud__pill span {
     background: var(--text);
     color: var(--bg);
+  }
+  /* Set by hud.ts after the first measurement, so the pill never animates in on load */
+  .hud__pill[data-ready] {
+    transition: clip-path var(--dur-pill) var(--ease-in-out);
   }
   .hud__readout {
     display: flex;
@@ -104,8 +132,6 @@ const start = hudMap.hero!;
   }
   .hud__val {
     color: var(--text);
-    display: inline-block;
-    min-width: 3ch;
   }
 
   @media (max-width: 860px) {
@@ -117,6 +143,7 @@ const start = hudMap.hero!;
       grid-row: 2;
       justify-content: flex-start;
       overflow-x: auto;
+      overscroll-behavior-x: contain;
       scrollbar-width: none;
       margin: 0 calc(var(--gutter) * -1);
       padding: 0 var(--gutter) 4px;

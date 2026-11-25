@@ -244,13 +244,11 @@ import { profile, fov } from '../data/site';
     border-radius: var(--radius-btn);
     font-weight: 500;
     text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
     transition:
-      border-color 0.2s,
-      background-color 0.2s;
-  }
-  .btn:hover {
-    border-color: var(--text-3);
-    background: var(--surface);
+      border-color var(--dur-hover) ease,
+      background-color var(--dur-hover) ease,
+      scale var(--dur-press) var(--ease-out);
   }
   .btn--primary {
     background: var(--text);
@@ -258,10 +256,20 @@ import { profile, fov } from '../data/site';
     color: var(--bg);
     font-weight: 600;
   }
-  .btn--primary:hover {
-    background: #fff;
-    border-color: #fff;
-    color: var(--bg);
+  @media (hover: hover) {
+    .btn:hover {
+      border-color: var(--text-3);
+      background: var(--surface);
+    }
+    .btn--primary:hover {
+      border-color: #fff;
+      background: #fff;
+      color: var(--bg);
+    }
+  }
+  /* Press feedback */
+  .btn:active {
+    scale: 0.96;
   }
 
   @media (max-width: 600px) {

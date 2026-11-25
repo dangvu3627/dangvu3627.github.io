@@ -54,6 +54,16 @@ const s = sections.find((x) => x.id === 'contact')!;
     line-height: 1.1;
     letter-spacing: -0.8px;
   }
+  .foot__email,
+  .foot__links a {
+    transition: color var(--dur-hover) ease;
+  }
+  @media (hover: hover) {
+    .foot__email:hover,
+    .foot__links a:hover {
+      color: var(--text);
+    }
+  }
   .foot__email {
     display: inline-flex;
     align-items: center;

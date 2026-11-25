@@ -24,10 +24,12 @@ const linkProps = href ? { href, target: '_blank', rel: 'noopener' } : {};
     border-radius: var(--radius-card);
     color: inherit;
     text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
     transition:
-      border-color 0.2s,
-      background-color 0.2s;
+      border-color var(--dur-target) ease,
+      background-color var(--dur-target) ease;
   }
+  /* Target brackets: snap in from 6px outside the corner. */
   .tgt::before,
   .tgt::after {
     content: '';
@@ -37,8 +39,8 @@ const linkProps = href ? { href, target: '_blank', rel: 'noopener' } : {};
     opacity: 0;
     pointer-events: none;
     transition:
-      opacity 0.2s,
-      transform 0.2s var(--ease);
+      opacity var(--dur-target) var(--ease-out),
+      transform var(--dur-target) var(--ease-out);
   }
   .tgt::before {
     left: -6px;
@@ -54,22 +56,32 @@ const linkProps = href ? { href, target: '_blank', rel: 'noopener' } : {};
     border-bottom: 2px solid var(--accent);
     transform: translate(6px, 6px);
   }
-  .tgt:hover,
+
+  /* Locked: keyboard focus always, hover only on hover-capable pointers. */
   .tgt:focus-visible,
-  .tgt:focus-within {
+  .tgt:has(:focus-visible) {
     border-color: var(--line-strong);
     background: var(--surface-hover);
   }
-  .tgt:hover::before,
-  .tgt:hover::after,
   .tgt:focus-visible::before,
   .tgt:focus-visible::after,
-  .tgt:focus-within::before,
-  .tgt:focus-within::after {
+  .tgt:has(:focus-visible)::before,
+  .tgt:has(:focus-visible)::after {
     opacity: 1;
     transform: none;
   }
-  a.tgt:hover {
-    color: inherit;
+  @media (hover: hover) {
+    .tgt:hover {
+      border-color: var(--line-strong);
+      background: var(--surface-hover);
+    }
+    .tgt:hover::before,
+    .tgt:hover::after {
+      opacity: 1;
+      transform: none;
+    }
+    a.tgt:hover {
+      color: inherit;
+    }
   }
 </style>
