@@ -1,0 +1,120 @@
+---
+import { profile, sections, hudMap } from '../data/site';
+const start = hudMap.hero!;
+---
+
+<header class="hud mono">
+  <div class="hud__inner">
+    <a href="#top" class="hud__brand">
+      <span class="hud__dot blink" aria-hidden="true"></span>
+      <span class="hud__name">{profile.name}</span>
+    </a>
+    <nav class="hud__nav" aria-label="Sections">
+      {
+        sections.map((s) => (
+          <a href={`#${s.id}`} data-nav={s.sec}>
+            {s.label}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="hud__readout" aria-hidden="true">
+      <span>SEC: <span class="hud__val" data-hud-sec>{start.label}</span></span>
+      <span>ALT: <span class="hud__val" data-hud-alt>{start.alt}m</span></span>
+    </div>
+  </div>
+</header>
+
+<style>
+  .hud {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(10, 11, 12, 0.82);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    font-size: 13px;
+  }
+  .hud__inner {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 6px var(--gutter);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0 24px;
+  }
+  .hud__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    text-decoration: none;
+  }
+  .hud__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .hud__name {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .hud__nav {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+  }
+  .hud__nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 12px;
+    border-radius: 6px;
+    color: var(--text-2);
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+  }
+  .hud__nav a:hover {
+    color: var(--text);
+  }
+  .hud__nav a[aria-current='true'] {
+    background: var(--text);
+    color: var(--bg);
+  }
+  .hud__readout {
+    display: flex;
+    gap: 18px;
+    color: var(--text-3);
+    white-space: nowrap;
+  }
+  .hud__val {
+    color: var(--text);
+    display: inline-block;
+    min-width: 3ch;
+  }
+
+  @media (max-width: 860px) {
+    .hud__inner {
+      grid-template-columns: 1fr auto;
+    }
+    .hud__nav {
+      grid-column: 1 / -1;
+      grid-row: 2;
+      justify-content: flex-start;
+      overflow-x: auto;
+      scrollbar-width: none;
+      margin: 0 calc(var(--gutter) * -1);
+      padding: 0 var(--gutter) 4px;
+    }
+    .hud__nav::-webkit-scrollbar {
+      display: none;
+    }
+  }
+</style>

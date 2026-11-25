@@ -1,13 +1,15 @@
 ---
-import '../styles/tokens.css';
-import '../styles/global.css';
-import { meta } from '../data/site';
+import Base from '../layouts/Base.astro';
+import HudBar from '../components/HudBar.astro';
+import HeroFov from '../components/HeroFov.astro';
 ---
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>{meta.title}</title>
-  </head>
-  <body></body>
-</html>
+
+<Base>
+  <HudBar />
+  <main id="main" tabindex="-1">
+    <HeroFov />
+  </main>
+  <script>
+    import '../scripts/hud.ts';
+  </script>
+</Base>
