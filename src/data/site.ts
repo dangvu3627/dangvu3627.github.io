@@ -37,7 +37,7 @@ export const profile: Profile = {
   name: 'Sam Vu',
   // Digital Hardware Specialization left out until admission is confirmed.
   tagline:
-    'Computer Science (Co-op) at the University of Waterloo · Embedded flight software at WARG',
+    'Computer Science (Co-op) at the University of Waterloo · Embedded Flight Software at WARG',
   about: '', // Sam writes this; render a visible TODO in dev only
   education: 'B.CS (Co-op) · Sep 2026 – May 2031',
   award: "President's Scholarship of Distinction (2026)",
